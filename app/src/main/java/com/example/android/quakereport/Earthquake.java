@@ -12,8 +12,8 @@ public class Earthquake {
     // name of the city .
     private String mPlace;
 
-    //Date of happening .
-    private String mDate ;
+    //Time of happening.
+    private long mTime ;
 
     /*Create a new quake oobject .
     *@param
@@ -21,11 +21,11 @@ public class Earthquake {
     * @param
      */
 
-    public Earthquake(String Rating , String City , String Date){
+    public Earthquake(String Rating , String City , long Time){
 
         mMagnitude = Rating ;
         mPlace = City ;
-        mDate = Date;
+        mTime = Time;
     }
 
     /**
@@ -45,7 +45,7 @@ public class Earthquake {
     /**
      * Get the date
      */
-    public String getDate() {return mDate;}
+    public long getTime() {return mTime;}
 
 
 }
