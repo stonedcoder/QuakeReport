@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -68,11 +69,33 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
          */
         //GEt the complete Location String for current EarthQuake
         String Location  = currentEarthquake.getCity();
-        //Split that string where it finds the word "of"
-        String[] splittedString = Location.split("of");
-        //Now store the two part of the splitted strings in primary and offset string variables
-        String primaryLocation = splittedString[0];
-        String offset_location  = splittedString [1];
+        //This location string contains the full string of the object.
+        //which is ( "5km N of Cairo, Egypt") then we have to split the strings
+        //so that we can save them in two different text views .
+        String primaryLocation ;
+        String offset_location;
+
+
+        //Now , we have to check wheather the orignal string which is LOCATION contains ("of") of the text ,
+        //if it contains ("of") , then we split the LOCATION string
+
+        if(Location.contains("of")){
+            //Split the string as an array of the strings
+            String[] splittedStrings = Location.split("of");
+            //Then the strings which contains (EX: 5km North of Cario Egypt ) will become (5 Km North) + of ,
+            //then we store this into offset location .
+            offset_location = splittedStrings[0] + "of";
+            //Then primary location will be (Cario , Egypt)
+            primaryLocation= splittedStrings[1];
+
+        }else {
+            // Otherwise, there is no " of " text in the originalLocation string.
+            // Hence, set the default location offset to say "Near the".
+            offset_location = getContext().getString(R.string.near_the);
+            // The primary location will be the full location string "Pacific-Antarctic Ridge".
+            primaryLocation = Location;
+        }
+
 
         // Find the reference to the primaryLocationTextView
         TextView primaryLocationTextView = (TextView) listItemView.findViewById(R.id.primary_location);
