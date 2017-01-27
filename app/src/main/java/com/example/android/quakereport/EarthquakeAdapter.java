@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -56,27 +56,34 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         Earthquake currentEarthquake = getItem(position);
 
         // Find the TextView in the earthquake_list_iteme_list_item.xml layout with the ID quake_rating
-        TextView ratingTextView = (TextView) listItemView.findViewById(R.id.magnitude);
-        // set this text on the name TextView
-        ratingTextView.setText(currentEarthquake.getRating());
+        TextView magnitudeView = (TextView) listItemView.findViewById(R.id.magnitude);
+        // Format the magnitude to show 1 decimal place
+        String formattedMagnitude = formatMagnitude(currentEarthquake.getMagnitude());
+        // set this text on the TextView
+        // Display the magnitude of the current earthquake in that TextView
+        magnitudeView.setText(formattedMagnitude);
 
 
-        // Find the TextView in the earthquake_list_iteme_list_item.xml layout with the ID quake_city
-        TextView cityTextView = (TextView) listItemView.findViewById(R.id.primary_location);
-        // set this text on the number TextView
-        cityTextView.setText(currentEarthquake.getCity());
+        /**
+         * Splitting Strings .
+         */
+        //GEt the complete Location String for current EarthQuake
+        String Location  = currentEarthquake.getCity();
+        //Split that string where it finds the word "of"
+        String[] splittedString = Location.split("of");
+        //Now store the two part of the splitted strings in primary and offset string variables
+        String primaryLocation = splittedString[0];
+        String offset_location  = splittedString [1];
 
-        // HERE IAM ADDIN THE CODE YPU TALKED ABOUT IN THE TUTORIAL .
-        String Location  = "location";
-        String offset_location = "offset";
+        // Find the reference to the primaryLocationTextView
+        TextView primaryLocationTextView = (TextView) listItemView.findViewById(R.id.primary_location);
+        //set the value on those textViews
+        primaryLocationTextView.setText(primaryLocation);
 
-        Location = currentEarthquake.getCity();
-
-        //Spliting the strings .
-        String[] splittedStrings = Location.split("of");
-        offset_location = splittedStrings[0];
-
-
+        // Find the reference to the offsetLocationTextView
+        TextView offsetLocationTextView = (TextView) listItemView.findViewById(R.id.location_offset);
+        //set the value on those textViews
+        offsetLocationTextView.setText(offset_location);
 
 
         // Create a new Date object from the time in milliseconds of the earthquake
@@ -115,6 +122,11 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
     private String formatTime(Date dateObject) {
         SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
         return timeFormat.format(dateObject);
+    }
+
+    private String formatMagnitude(double magnitude) {
+        DecimalFormat magnitudeFormat = new DecimalFormat("0.0");
+        return magnitudeFormat.format(magnitude);
     }
 
 

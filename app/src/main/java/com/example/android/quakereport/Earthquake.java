@@ -7,7 +7,7 @@ package com.example.android.quakereport;
 public class Earthquake {
 
     // Number of earthquake rating
-    private String mMagnitude;
+    private Double mMagnitude;
 
     // name of the city .
     private String mPlace;
@@ -21,9 +21,9 @@ public class Earthquake {
     * @param
      */
 
-    public Earthquake(String Rating , String City , long Time){
+    public Earthquake(Double magnitude , String City , long Time){
 
-        mMagnitude = Rating ;
+        mMagnitude = magnitude ;
         mPlace = City ;
         mTime = Time;
     }
@@ -31,7 +31,7 @@ public class Earthquake {
     /**
      * Get the rating of the earthquake
      */
-    public String getRating() {
+    public Double getMagnitude() {
         return mMagnitude;
     }
 
