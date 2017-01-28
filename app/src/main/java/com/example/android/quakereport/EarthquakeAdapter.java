@@ -1,6 +1,8 @@
 package com.example.android.quakereport;
 
 import android.app.Activity;
+import android.graphics.drawable.GradientDrawable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +65,17 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         // set this text on the TextView
         magnitudeView.setText(formattedMagnitude);
 
+        // Set the proper background color on the magnitude circle.
+        // Fetch the background from the TextView, which is a GradientDrawable.
+        GradientDrawable magnitudeCircle = (GradientDrawable) magnitudeView.getBackground();
+
+        // Get the appropriate background color based on the current earthquake magnitude
+        int magnitudeColor = getMagnitudeColor(currentEarthquake.getMagnitude());
+
+        // Set the color on the magnitude circle
+        magnitudeCircle.setColor(magnitudeColor);
+
+
 
         /**
          * Splitting Strings .
@@ -74,8 +87,6 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         //so that we can save them in two different text views .
         String primaryLocation ;
         String offset_location;
-
-
         //Now , we have to check wheather the orignal string which is LOCATION contains ("of") of the text ,
         //if it contains ("of") , then we split the LOCATION string
 
@@ -95,6 +106,7 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
             // The primary location will be the full location string "Pacific-Antarctic Ridge".
             primaryLocation = Location;
         }
+
 
 
         // Find the reference to the primaryLocationTextView
@@ -151,5 +163,38 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         return magnitudeFormat.format(magnitude);
     }
 
+    private Double getMagnitudeColor(double magnitude){
+        int magnitudeColorResourceID;
+        switch (magnitudeColorResourceID){
+            case 0:
+            case 1:
+                magnitudeColorResourceID =  ContextCompat.getColor(getContext(), R.color.magnitude1);
+                break;
+            case 2 :
+                magnitudeColorResourceID =  ContextCompat.getColor(getContext(), R.color.magnitude2);
+                break;
+            case 3 :
+                magnitudeColorResourceID =  ContextCompat.getColor(getContext(), R.color.magnitude3);
+                break;
+            case 4 :
+                magnitudeColorResourceID =  ContextCompat.getColor(getContext(), R.color.magnitude4);
+                break;
+            case 5 :
+                magnitudeColorResourceID =  ContextCompat.getColor(getContext(), R.color.magnitude5);
+                break;
+            case 6 :
+                magnitudeColorResourceID =  ContextCompat.getColor(getContext(), R.color.magnitude6);
+                break;
+            case 7 :
+                magnitudeColorResourceID =  ContextCompat.getColor(getContext(), R.color.magnitude7);
+                break;
+            case 8 :
+                magnitudeColorResourceID =  ContextCompat.getColor(getContext(), R.color.magnitude8);
+                break;
+            case 9 :
+                magnitudeColorResourceID =  ContextCompat.getColor(getContext(), R.color.magnitude9);
+                break;
 
+        }
+    }
 }
