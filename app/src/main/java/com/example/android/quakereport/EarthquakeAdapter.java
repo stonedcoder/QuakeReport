@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
+import android.support.v4.content.ContextCompat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -163,36 +163,36 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         return magnitudeFormat.format(magnitude);
     }
 
-    private Double getMagnitudeColor(double magnitude){
-        int magnitudeColorResourceID;
-        switch (magnitudeColorResourceID){
+    private int getMagnitudeColor(double magnitude){
+
+        switch ((int)magnitude){
             case 0:
             case 1:
-                magnitudeColorResourceID =  ContextCompat.getColor(getContext(), R.color.magnitude1);
+                magnitude =  ContextCompat.getColor(getContext(), R.color.magnitude1);
                 break;
             case 2 :
-                magnitudeColorResourceID =  ContextCompat.getColor(getContext(), R.color.magnitude2);
+                magnitude =  ContextCompat.getColor(getContext(), R.color.magnitude2);
                 break;
             case 3 :
-                magnitudeColorResourceID =  ContextCompat.getColor(getContext(), R.color.magnitude3);
+                magnitude =  ContextCompat.getColor(getContext(), R.color.magnitude3);
                 break;
             case 4 :
-                magnitudeColorResourceID =  ContextCompat.getColor(getContext(), R.color.magnitude4);
+                magnitude =  ContextCompat.getColor(getContext(), R.color.magnitude4);
                 break;
             case 5 :
-                magnitudeColorResourceID =  ContextCompat.getColor(getContext(), R.color.magnitude5);
+                magnitude =  ContextCompat.getColor(getContext(), R.color.magnitude5);
                 break;
             case 6 :
-                magnitudeColorResourceID =  ContextCompat.getColor(getContext(), R.color.magnitude6);
+                magnitude =  ContextCompat.getColor(getContext(), R.color.magnitude6);
                 break;
             case 7 :
-                magnitudeColorResourceID =  ContextCompat.getColor(getContext(), R.color.magnitude7);
+                magnitude =  ContextCompat.getColor(getContext(), R.color.magnitude7);
                 break;
             case 8 :
-                magnitudeColorResourceID =  ContextCompat.getColor(getContext(), R.color.magnitude8);
+                magnitude =  ContextCompat.getColor(getContext(), R.color.magnitude8);
                 break;
             case 9 :
-                magnitudeColorResourceID =  ContextCompat.getColor(getContext(), R.color.magnitude9);
+                magnitude =  ContextCompat.getColor(getContext(), R.color.magnitude9);
                 break;
 
         }
