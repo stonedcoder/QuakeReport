@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.support.v4.content.ContextCompat;
+
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -164,8 +164,9 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
     }
 
     private int getMagnitudeColor(double magnitude){
-
-        switch ((int)magnitude){
+        //convert the (double magnitude into int)
+        //convert that into int using method like: Math.floor() and then use the Switch on that int value
+        switch ((int) Math.floor(magnitude)){
             case 0:
             case 1:
                 magnitude =  ContextCompat.getColor(getContext(), R.color.magnitude1);
@@ -196,5 +197,6 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
                 break;
 
         }
+        return ContextCompat.getColor(getContext(), (int) Math.floor(magnitude));
     }
 }
